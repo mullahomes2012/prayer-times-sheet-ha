@@ -1,12 +1,12 @@
 {
   "domain": "prayer_times_sheet",
-  "name": "Prayer Times (Google Sheet)",
-  "version": "1.0.0",
+  "name": "Salaah Times",
+  "version": "2.0.0",
   "config_flow": true,
-  "documentation": "https://github.com/your-repo/prayer-times-sheet",
-  "issue_tracker": "https://github.com/your-repo/prayer-times-sheet/issues",
+  "documentation": "https://github.com/mullahomes2012/prayer-times-sheet-ha",
+  "issue_tracker": "https://github.com/mullahomes2012/prayer-times-sheet-ha/issues",
   "dependencies": [],
-  "codeowners": [],
+  "codeowners": ["@mullahomes2012"],
   "requirements": [],
   "iot_class": "cloud_polling",
   "hacs": "1.0.0"
