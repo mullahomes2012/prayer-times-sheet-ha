@@ -69,8 +69,29 @@
   "options": {
     "step": {
       "init": {
-        "title": "Update Enabled Prayers",
+        "title": "Enable / disable prayers",
         "description": "Toggle which prayers are active as HA sensors."
+      },
+      "rename": {
+        "title": "Custom prayer names",
+        "description": "Set a custom display name for each sensor. Leave unchanged to keep the default.",
+        "data": {
+          "fajr_start": "Fajr Start",
+          "fajr_jamaat": "Fajr Jamaat",
+          "sunrise": "Sunrise",
+          "dhuhr_start": "Dhuhr Start",
+          "dhuhr_jamaat": "Dhuhr Jamaat",
+          "zawaal": "Zawaal",
+          "asr_start": "Asr Start",
+          "asr_jamaat": "Asr Jamaat",
+          "maghrib_start": "Maghrib Start",
+          "maghrib_jamaat": "Maghrib Jamaat",
+          "isha_start": "Isha Start",
+          "isha_jamaat": "Isha Jamaat",
+          "jumuah": "Jumuah",
+          "suhoor": "Suhoor",
+          "iftaar": "Iftaar"
+        }
       }
     }
   }

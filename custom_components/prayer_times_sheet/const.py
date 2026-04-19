@@ -6,6 +6,7 @@ CONF_DATE_COLUMN = "date_column"
 CONF_DATE_FORMAT = "date_format"
 CONF_COLUMN_MAPPING = "column_mapping"
 CONF_ENABLED_PRAYERS = "enabled_prayers"
+CONF_CUSTOM_NAMES = "custom_names"
 
 SCAN_INTERVAL_MINUTES = 60
 

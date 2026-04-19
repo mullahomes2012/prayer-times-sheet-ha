@@ -12,6 +12,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import (
+    CONF_CUSTOM_NAMES,
     CONF_ENABLED_PRAYERS,
     CONF_SHEET_NAME,
     DOMAIN,
@@ -30,18 +31,20 @@ async def async_setup_entry(
     """Set up sensors for a config entry."""
     coordinator: PrayerTimesCoordinator = hass.data[DOMAIN][entry.entry_id]
 
-    enabled = entry.data.get(
+    enabled = entry.options.get(
         CONF_ENABLED_PRAYERS,
-        entry.options.get(CONF_ENABLED_PRAYERS, []),
+        entry.data.get(CONF_ENABLED_PRAYERS, []),
     )
-    # Options flow can override
-    if entry.options.get(CONF_ENABLED_PRAYERS):
-        enabled = entry.options[CONF_ENABLED_PRAYERS]
+
+    custom_names: dict[str, str] = entry.options.get(
+        CONF_CUSTOM_NAMES,
+        entry.data.get(CONF_CUSTOM_NAMES, {}),
+    )
 
     sheet_name: str = entry.data[CONF_SHEET_NAME]
 
     entities = [
-        PrayerTimeSensor(coordinator, entry, prayer_key, sheet_name)
+        PrayerTimeSensor(coordinator, entry, prayer_key, sheet_name, custom_names)
         for prayer_key in enabled
     ]
     async_add_entities(entities)
@@ -56,13 +59,15 @@ class PrayerTimeSensor(CoordinatorEntity, SensorEntity):
         entry: ConfigEntry,
         prayer_key: str,
         sheet_name: str,
+        custom_names: dict[str, str],
     ) -> None:
         super().__init__(coordinator)
         self._prayer_key = prayer_key
         self._sheet_name = sheet_name
         self._entry_id = entry.entry_id
 
-        label = PRAYER_SLOT_LABELS.get(prayer_key, prayer_key.replace("_", " ").title())
+        default_label = PRAYER_SLOT_LABELS.get(prayer_key, prayer_key.replace("_", " ").title())
+        label = custom_names.get(prayer_key, default_label)
         self._attr_name = f"{sheet_name} {label}"
         self._attr_unique_id = f"{entry.entry_id}_{prayer_key}"
         self._attr_icon = "mdi:clock-outline"

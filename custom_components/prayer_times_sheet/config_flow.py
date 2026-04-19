@@ -12,6 +12,7 @@ from homeassistant.data_entry_flow import FlowResult
 
 from .const import (
     CONF_COLUMN_MAPPING,
+    CONF_CUSTOM_NAMES,
     CONF_DATE_COLUMN,
     CONF_DATE_FORMAT,
     CONF_ENABLED_PRAYERS,
@@ -211,23 +212,31 @@ class PrayerTimesSheetConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
 
 class PrayerTimesOptionsFlow(config_entries.OptionsFlow):
-    """Allow the user to change which prayers are enabled after setup."""
+    """Allow the user to change enabled prayers and custom names after setup."""
 
     def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
         self._config_entry = config_entry
+        self._enabled_prayers: list[str] = []
 
+    # ------------------------------------------------------------------ #
+    # Step 1 — Enable / disable prayers                                   #
+    # ------------------------------------------------------------------ #
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
-        mapped_keys: list[str] = self._config_entry.data.get(CONF_COLUMN_MAPPING, {}).keys()
-        currently_enabled: list[str] = self._config_entry.data.get(CONF_ENABLED_PRAYERS, [])
+        mapped_keys = list(
+            self._config_entry.data.get(CONF_COLUMN_MAPPING, {}).keys()
+        )
+        currently_enabled: list[str] = self._config_entry.options.get(
+            CONF_ENABLED_PRAYERS,
+            self._config_entry.data.get(CONF_ENABLED_PRAYERS, []),
+        )
 
         if user_input is not None:
-            enabled = [k for k in mapped_keys if user_input.get(k, False)]
-            return self.async_create_entry(
-                title="",
-                data={CONF_ENABLED_PRAYERS: enabled},
-            )
+            self._enabled_prayers = [
+                k for k in mapped_keys if user_input.get(k, False)
+            ]
+            return await self.async_step_rename()
 
         schema_dict = {
             vol.Optional(k, default=(k in currently_enabled)): bool
@@ -237,4 +246,47 @@ class PrayerTimesOptionsFlow(config_entries.OptionsFlow):
         return self.async_show_form(
             step_id="init",
             data_schema=vol.Schema(schema_dict),
+            description_placeholders={
+                "hint": "Toggle which prayers are active, then click Next to rename them."
+            },
+        )
+
+    # ------------------------------------------------------------------ #
+    # Step 2 — Custom display names                                       #
+    # ------------------------------------------------------------------ #
+    async def async_step_rename(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        current_names: dict[str, str] = self._config_entry.options.get(
+            CONF_CUSTOM_NAMES,
+            self._config_entry.data.get(CONF_CUSTOM_NAMES, {}),
+        )
+
+        if user_input is not None:
+            # Only store names that differ from the default
+            custom_names = {
+                k: v.strip()
+                for k, v in user_input.items()
+                if v.strip() and v.strip() != PRAYER_SLOT_LABELS.get(k, k)
+            }
+            return self.async_create_entry(
+                title="",
+                data={
+                    CONF_ENABLED_PRAYERS: self._enabled_prayers,
+                    CONF_CUSTOM_NAMES: custom_names,
+                },
+            )
+
+        schema_dict = {}
+        for k in self._enabled_prayers:
+            default_label = PRAYER_SLOT_LABELS.get(k, k.replace("_", " ").title())
+            current = current_names.get(k, default_label)
+            schema_dict[vol.Optional(k, default=current)] = str
+
+        return self.async_show_form(
+            step_id="rename",
+            data_schema=vol.Schema(schema_dict),
+            description_placeholders={
+                "hint": "Customise the display name for each prayer sensor. Leave as-is to keep the default."
+            },
         )
