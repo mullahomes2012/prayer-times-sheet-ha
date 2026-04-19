@@ -2,7 +2,7 @@
   "config": {
     "step": {
       "user": {
-        "title": "Salaah Times — add a sheet",
+        "title": "Awqaat — add a sheet",
         "description": "Paste the published Google Sheet CSV URL.",
         "data": {
           "sheet_url": "Google Sheet CSV URL",

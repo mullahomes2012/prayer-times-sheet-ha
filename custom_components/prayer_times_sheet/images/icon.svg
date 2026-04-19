@@ -1,17 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <circle cx="50" cy="50" r="49" fill="#0f172a"/>
-  <circle cx="50" cy="50" r="48.5" fill="none" stroke="#c9a84c" stroke-width="0.8"/>
-  <circle cx="52" cy="50" r="28" fill="none" stroke="#c9a84c" stroke-width="0.8"/>
-  <line x1="52" y1="25" x2="52" y2="28.5" stroke="#c9a84c" stroke-width="1" stroke-linecap="round"/>
-  <line x1="52" y1="71.5" x2="52" y2="75" stroke="#c9a84c" stroke-width="1" stroke-linecap="round"/>
-  <line x1="24" y1="50" x2="27.5" y2="50" stroke="#c9a84c" stroke-width="1" stroke-linecap="round"/>
-  <line x1="76.5" y1="50" x2="80" y2="50" stroke="#c9a84c" stroke-width="1" stroke-linecap="round"/>
-  <line x1="52" y1="50" x2="57" y2="33" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="52" y1="50" x2="52" y2="28" stroke="#c9a84c" stroke-width="1" stroke-linecap="round"/>
-  <circle cx="52" cy="50" r="1.5" fill="#c9a84c"/>
-  <circle cx="40" cy="44" r="19" fill="#c9a84c"/>
-  <circle cx="47" cy="38" r="16" fill="#0f172a"/>
-  <g transform="translate(30,28) scale(0.55)">
-    <polygon points="0,-9 2.1,-2.9 8.6,-2.9 3.5,1.1 5.3,7.6 0,3.9 -5.3,7.6 -3.5,1.1 -8.6,-2.9 -2.1,-2.9" fill="#c9a84c"/>
-  </g>
+  <!-- White background circle -->
+  <circle cx="50" cy="50" r="49" fill="#ffffff"/>
+  <!-- Green outer ring -->
+  <circle cx="50" cy="50" r="48.5" fill="none" stroke="#2e7d4f" stroke-width="1.5"/>
+
+  <!-- Clock face -->
+  <circle cx="54" cy="50" r="28" fill="none" stroke="#2e7d4f" stroke-width="1"/>
+  <!-- Hour ticks -->
+  <line x1="54" y1="24" x2="54" y2="27" stroke="#2e7d4f" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="54" y1="73" x2="54" y2="76" stroke="#2e7d4f" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="26" y1="50" x2="29" y2="50" stroke="#2e7d4f" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="79" y1="50" x2="82" y2="50" stroke="#2e7d4f" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Minor ticks -->
+  <line x1="68" y1="27" x2="66" y2="30" stroke="#2e7d4f" stroke-width="0.7" stroke-linecap="round" opacity="0.5"/>
+  <line x1="77" y1="36" x2="74" y2="38" stroke="#2e7d4f" stroke-width="0.7" stroke-linecap="round" opacity="0.5"/>
+  <line x1="77" y1="64" x2="74" y2="62" stroke="#2e7d4f" stroke-width="0.7" stroke-linecap="round" opacity="0.5"/>
+  <line x1="68" y1="73" x2="66" y2="70" stroke="#2e7d4f" stroke-width="0.7" stroke-linecap="round" opacity="0.5"/>
+  <line x1="40" y1="73" x2="42" y2="70" stroke="#2e7d4f" stroke-width="0.7" stroke-linecap="round" opacity="0.5"/>
+  <line x1="31" y1="64" x2="34" y2="62" stroke="#2e7d4f" stroke-width="0.7" stroke-linecap="round" opacity="0.5"/>
+  <line x1="31" y1="36" x2="34" y2="38" stroke="#2e7d4f" stroke-width="0.7" stroke-linecap="round" opacity="0.5"/>
+  <line x1="40" y1="27" x2="42" y2="30" stroke="#2e7d4f" stroke-width="0.7" stroke-linecap="round" opacity="0.5"/>
+  <!-- Clock hands -->
+  <line x1="54" y1="50" x2="60" y2="37" stroke="#2e7d4f" stroke-width="2"   stroke-linecap="round"/>
+  <line x1="54" y1="50" x2="54" y2="28" stroke="#2e7d4f" stroke-width="1.4" stroke-linecap="round"/>
+  <circle cx="54" cy="50" r="2" fill="#2e7d4f"/>
+
+  <!-- Crescent moon — pushed left -->
+  <circle cx="37" cy="46" r="20" fill="#2e7d4f"/>
+  <circle cx="44" cy="41" r="17" fill="#ffffff"/>
 </svg>

@@ -1,7 +1,7 @@
 {
   "domain": "prayer_times_sheet",
-  "name": "Salaah Times",
-  "version": "2.0.0",
+  "name": "Awqaat",
+  "version": "2.1.0",
   "config_flow": true,
   "documentation": "https://github.com/mullahomes2012/prayer-times-sheet-ha",
   "issue_tracker": "https://github.com/mullahomes2012/prayer-times-sheet-ha/issues",

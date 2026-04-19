@@ -84,7 +84,7 @@ class PrayerTimeSensor(CoordinatorEntity, SensorEntity):
             identifiers={(DOMAIN, self._entry_id)},
             name=self._sheet_name,
             manufacturer="Mullatech",
-            model="Salaah Times",
+            model="Awqaat",
             entry_type=DeviceEntryType.SERVICE,
         )
 
