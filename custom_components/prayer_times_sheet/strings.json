@@ -3,95 +3,97 @@
     "step": {
       "user": {
         "title": "Prayer Times — Google Sheet",
-        "description": "Paste the published Google Sheet URL. It must be published to the web (File → Share → Publish to web).",
+        "description": "Paste the published Google Sheet CSV URL.",
         "data": {
           "sheet_url": "Google Sheet URL",
-          "sheet_name": "Name (e.g. My Masjid)",
+          "sheet_name": "Sheet label (used internally)",
+          "sheet_prefix": "Sensor name prefix (optional, e.g. 'Green Lane')",
           "date_format": "Date format used in the sheet"
         }
       },
       "date_column": {
         "title": "Date Column",
-        "description": "Which column in your sheet contains the date?",
-        "data": {
-          "date_column": "Date column"
-        }
+        "description": "Which column contains the date?",
+        "data": { "date_column": "Date column" }
       },
       "map_prayers": {
         "title": "Map Prayer Columns",
-        "description": "Match each prayer/time to its column in the sheet. Leave as '__none__' if the prayer is not in your sheet.",
+        "description": "Match each prayer to its column. Set to '__none__' if not in your sheet.",
         "data": {
-          "fajr_start": "Fajr Start",
-          "fajr_jamaat": "Fajr Jamaat",
-          "sunrise": "Sunrise",
-          "dhuhr_start": "Dhuhr Start",
-          "dhuhr_jamaat": "Dhuhr Jamaat",
-          "zawaal": "Zawaal",
-          "asr_start": "Asr Start",
-          "asr_jamaat": "Asr Jamaat",
-          "maghrib_start": "Maghrib Start",
-          "maghrib_jamaat": "Maghrib Jamaat",
-          "isha_start": "Isha Start",
-          "isha_jamaat": "Isha Jamaat",
-          "jumuah": "Jumuah",
-          "suhoor": "Suhoor",
-          "iftaar": "Iftaar"
+          "fajr_start": "Fajr Start", "fajr_jamaat": "Fajr Jama'ah",
+          "sunrise": "Sunrise", "dhuhr_start": "Dhuhr Start",
+          "dhuhr_jamaat": "Dhuhr Jama'ah", "zawaal": "Zawaal",
+          "asr_start": "Asr Start", "asr_jamaat": "Asr Jama'ah",
+          "maghrib_start": "Maghrib Start", "maghrib_jamaat": "Maghrib Jama'ah",
+          "isha_start": "Isha Start", "isha_jamaat": "Isha Jama'ah",
+          "jumuah": "Jumu'ah", "suhoor": "Suhoor", "iftaar": "Iftaar"
         }
       },
       "select_prayers": {
         "title": "Enable Prayers",
-        "description": "Choose which prayers to create sensors for in Home Assistant.",
+        "description": "Choose which prayers to create sensors for.",
         "data": {
-          "fajr_start": "Fajr Start",
-          "fajr_jamaat": "Fajr Jamaat",
-          "sunrise": "Sunrise",
-          "dhuhr_start": "Dhuhr Start",
-          "dhuhr_jamaat": "Dhuhr Jamaat",
-          "zawaal": "Zawaal",
-          "asr_start": "Asr Start",
-          "asr_jamaat": "Asr Jamaat",
-          "maghrib_start": "Maghrib Start",
-          "maghrib_jamaat": "Maghrib Jamaat",
-          "isha_start": "Isha Start",
-          "isha_jamaat": "Isha Jamaat",
-          "jumuah": "Jumuah",
-          "suhoor": "Suhoor",
-          "iftaar": "Iftaar"
+          "fajr_start": "Fajr Start", "fajr_jamaat": "Fajr Jama'ah",
+          "sunrise": "Sunrise", "dhuhr_start": "Dhuhr Start",
+          "dhuhr_jamaat": "Dhuhr Jama'ah", "zawaal": "Zawaal",
+          "asr_start": "Asr Start", "asr_jamaat": "Asr Jama'ah",
+          "maghrib_start": "Maghrib Start", "maghrib_jamaat": "Maghrib Jama'ah",
+          "isha_start": "Isha Start", "isha_jamaat": "Isha Jama'ah",
+          "jumuah": "Jumu'ah", "suhoor": "Suhoor", "iftaar": "Iftaar"
         }
       }
     },
     "error": {
-      "invalid_url": "Could not parse a valid Google Sheet URL. Make sure it is published to the web.",
-      "cannot_connect": "Could not connect to the sheet. Check the URL and your internet connection.",
-      "empty_sheet": "The sheet appears to be empty or has no headers."
+      "invalid_url": "Could not parse a valid Google Sheet URL.",
+      "cannot_connect": "Could not connect to the sheet.",
+      "empty_sheet": "The sheet appears empty or has no headers."
     }
   },
   "options": {
     "step": {
       "init": {
         "title": "Enable / disable prayers",
-        "description": "Toggle which prayers are active as HA sensors."
+        "description": "Toggle which prayers are active as HA sensors.",
+        "data": {
+          "fajr_start": "Fajr Start", "fajr_jamaat": "Fajr Jama'ah",
+          "sunrise": "Sunrise", "dhuhr_start": "Dhuhr Start",
+          "dhuhr_jamaat": "Dhuhr Jama'ah", "zawaal": "Zawaal",
+          "asr_start": "Asr Start", "asr_jamaat": "Asr Jama'ah",
+          "maghrib_start": "Maghrib Start", "maghrib_jamaat": "Maghrib Jama'ah",
+          "isha_start": "Isha Start", "isha_jamaat": "Isha Jama'ah",
+          "jumuah": "Jumu'ah", "suhoor": "Suhoor", "iftaar": "Iftaar"
+        }
+      },
+      "end_times": {
+        "title": "End times",
+        "description": "Choose when each prayer ends — either a number of minutes after it starts, or at the start of another prayer.",
+        "data": {
+          "fajr_start": "Fajr Start ends at", "fajr_jamaat": "Fajr Jama'ah ends at",
+          "sunrise": "Sunrise ends at", "dhuhr_start": "Dhuhr Start ends at",
+          "dhuhr_jamaat": "Dhuhr Jama'ah ends at", "zawaal": "Zawaal ends at",
+          "asr_start": "Asr Start ends at", "asr_jamaat": "Asr Jama'ah ends at",
+          "maghrib_start": "Maghrib Start ends at", "maghrib_jamaat": "Maghrib Jama'ah ends at",
+          "isha_start": "Isha Start ends at", "isha_jamaat": "Isha Jama'ah ends at",
+          "jumuah": "Jumu'ah ends at", "suhoor": "Suhoor ends at", "iftaar": "Iftaar ends at"
+        }
       },
       "rename": {
         "title": "Custom prayer names",
-        "description": "Set a custom display name for each sensor. Leave unchanged to keep the default.",
+        "description": "Set a custom display name for each sensor.",
         "data": {
-          "fajr_start": "Fajr Start",
-          "fajr_jamaat": "Fajr Jamaat",
-          "sunrise": "Sunrise",
-          "dhuhr_start": "Dhuhr Start",
-          "dhuhr_jamaat": "Dhuhr Jamaat",
-          "zawaal": "Zawaal",
-          "asr_start": "Asr Start",
-          "asr_jamaat": "Asr Jamaat",
-          "maghrib_start": "Maghrib Start",
-          "maghrib_jamaat": "Maghrib Jamaat",
-          "isha_start": "Isha Start",
-          "isha_jamaat": "Isha Jamaat",
-          "jumuah": "Jumuah",
-          "suhoor": "Suhoor",
-          "iftaar": "Iftaar"
+          "fajr_start": "Fajr Start", "fajr_jamaat": "Fajr Jama'ah",
+          "sunrise": "Sunrise", "dhuhr_start": "Dhuhr Start",
+          "dhuhr_jamaat": "Dhuhr Jama'ah", "zawaal": "Zawaal",
+          "asr_start": "Asr Start", "asr_jamaat": "Asr Jama'ah",
+          "maghrib_start": "Maghrib Start", "maghrib_jamaat": "Maghrib Jama'ah",
+          "isha_start": "Isha Start", "isha_jamaat": "Isha Jama'ah",
+          "jumuah": "Jumu'ah", "suhoor": "Suhoor", "iftaar": "Iftaar"
         }
+      },
+      "prefix": {
+        "title": "Sensor name prefix",
+        "description": "Optional prefix added to all sensor names from this sheet.",
+        "data": { "sheet_prefix": "Prefix (e.g. Green Lane)" }
       }
     }
   }
