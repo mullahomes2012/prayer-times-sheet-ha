@@ -86,7 +86,7 @@ class PrayerTimesSheetConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 {
                     vol.Required(CONF_SHEET_URL): str,
                     vol.Required(CONF_SHEET_NAME, default="My Masjid"): str,
-                    vol.Required(CONF_DATE_FORMAT, default="%-d/%-m/%Y"): vol.In(
+                    vol.Required(CONF_DATE_FORMAT, default="%Y-%m-%d"): vol.In(
                         DATE_FORMAT_OPTIONS
                     ),
                 }

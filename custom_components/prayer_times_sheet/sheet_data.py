@@ -56,29 +56,59 @@ async def get_columns(session: aiohttp.ClientSession, url: str) -> list[str]:
     return list(rows[0].keys())
 
 
+ALL_DATE_FORMATS = [
+    "%Y-%m-%d",
+    "%d/%m/%Y",
+    "%-d/%-m/%Y",
+    "%d-%m-%Y",
+    "%d %b %Y",
+    "%d %B %Y",
+    "%Y/%m/%d",
+    "%m/%d/%Y",
+]
+
+
 def find_todays_row(
     rows: list[dict],
     date_column: str,
     date_format: str,
 ) -> dict | None:
     """Find the row matching today's date."""
-    today_str = datetime.now().strftime(date_format)
-    for row in rows:
-        cell = row.get(date_column, "").strip()
-        if cell == today_str:
-            return row
-    # Fallback: try parsing each cell with the given format
     today = datetime.now().date()
-    for row in rows:
-        cell = row.get(date_column, "").strip()
+
+    # Build a set of all possible string representations of today
+    today_strings: set[str] = set()
+    for fmt in [date_format] + ALL_DATE_FORMATS:
         try:
-            parsed = datetime.strptime(cell, date_format).date()
-            if parsed == today:
-                return row
+            today_strings.add(datetime.now().strftime(fmt))
         except ValueError:
-            continue
+            pass
+
+    # Also try parsing each cell against all known formats
+    for row in rows:
+        # Strip BOM, whitespace, and invisible chars from the cell value
+        cell = row.get(date_column, "")
+        if cell is None:
+            cell = ""
+        cell = cell.strip().lstrip("\ufeff").strip()
+
+        # Fast string match first
+        if cell in today_strings:
+            return row
+
+        # Slower parse fallback
+        for fmt in [date_format] + ALL_DATE_FORMATS:
+            try:
+                if datetime.strptime(cell, fmt).date() == today:
+                    return row
+            except ValueError:
+                continue
+
     _LOGGER.warning(
-        "No row found for today (%s) in column '%s'", today_str, date_column
+        "No row found for today (%s) in column '%s'. First few date values: %s",
+        today,
+        date_column,
+        [r.get(date_column, "").strip() for r in rows[:5]],
     )
     return None
 
