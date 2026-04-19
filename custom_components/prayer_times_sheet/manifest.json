@@ -1,0 +1,13 @@
+{
+  "domain": "prayer_times_sheet",
+  "name": "Prayer Times (Google Sheet)",
+  "version": "1.0.0",
+  "config_flow": true,
+  "documentation": "https://github.com/your-repo/prayer-times-sheet",
+  "issue_tracker": "https://github.com/your-repo/prayer-times-sheet/issues",
+  "dependencies": [],
+  "codeowners": [],
+  "requirements": [],
+  "iot_class": "cloud_polling",
+  "hacs": "1.0.0"
+}
