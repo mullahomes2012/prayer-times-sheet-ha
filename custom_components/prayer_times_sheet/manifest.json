@@ -1,7 +1,7 @@
 {
   "domain": "prayer_times_sheet",
   "name": "Awqaat",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "config_flow": true,
   "documentation": "https://github.com/mullahomes2012/prayer-times-sheet-ha",
   "issue_tracker": "https://github.com/mullahomes2012/prayer-times-sheet-ha/issues",
@@ -9,5 +9,6 @@
   "codeowners": ["@mullahomes2012"],
   "requirements": [],
   "iot_class": "cloud_polling",
-  "hacs": "1.0.0"
+  "hacs": "1.0.0",
+  "logo": "logo.png"
 }
